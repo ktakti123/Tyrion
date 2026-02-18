@@ -44,8 +44,8 @@ LRESULT CALLBACK MainWindowProc(HWND WindowHandle, UINT Message, WPARAM wParam, 
         keyDown[wParam & 0xFF] = true;
         switch (wParam)
         {
-        case 'N': fov += 0.1f; break;
-        case 'M': fov -= 0.1f; break;
+        case 'N': camerafov += 0.1f; break;
+        case 'M': camerafov -= 0.1f; break;
         }
         return 0;
 
@@ -104,6 +104,9 @@ LRESULT CALLBACK MainWindowProc(HWND WindowHandle, UINT Message, WPARAM wParam, 
         {
             camerayaw += deltaX * sensitivity;
             camerapitch += deltaY * sensitivity;
+            fx =  cos(camerapitch) * sin(camerayaw);
+            fy = -sin(camerapitch);
+            fz =  cos(camerapitch) * cos(camerayaw);
         }
         else if (dragpan)
         {
@@ -111,8 +114,14 @@ LRESULT CALLBACK MainWindowProc(HWND WindowHandle, UINT Message, WPARAM wParam, 
             cameray -= deltaY * sensitivity;
         }
         else if (dragzoom)
-        {
-            cameraz -= deltaY * sensitivity * 5.0f; // zoom factor
+        {       
+            camerazoom -= deltaY * sensitivity * 5.0f; // zoom factor
+            fx =  cos(camerapitch) * sin(camerayaw);
+            fy = -sin(camerapitch);
+            fz =  cos(camerapitch) * cos(camerayaw);
+            
+
+            
         }
     }
         return 0;

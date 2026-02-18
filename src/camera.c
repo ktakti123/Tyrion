@@ -6,10 +6,11 @@
 
  bool keyDown[256];
 Camera cameradefault[2] = {
-    { 0, 0, 4, 0, 0, 11.3 },
-    {  0, 0, 4, 0, 0, 11.3 }
+    { 0, 0, 4, 0, 0, 1.3 },
+    {  0, 0, 4, 0, 0, 1.3 }
 };
 float camerax,cameray,cameraz,camerapitch,camerayaw,camerafov;
+float camerazoom,fx,fy,fz;
 
 void camera(int cam){
     camerax = cameradefault[cam].x;

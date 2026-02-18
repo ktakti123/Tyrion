@@ -326,56 +326,64 @@ void rotate_translate_axis(int i,float tx1,float ty1,float tz1,float tx2,float t
     float ay3 = ty3 - cameray;
     float az3 = tz3 - cameraz;
 
+    
+
+     
   float cx1,cx2,cx3,cy1,cy2,cy3,cz1,cz2,cz3,cnx3d,cny3d,cnz3d;
   float ccx1,ccx2,ccx3,ccy1,ccy2,ccy3,ccz1,ccz2,ccz3,ccnx3d,ccny3d,ccnz3d;
 
-  //rotate x axis 
-  cy1 = ay1*cos(camerapitch) - az1*sin(camerapitch);
-  cz1 = ay1*sin(camerapitch) + az1*cos(camerapitch);
-  cx1 = ax1;
-  cnx3d = tnx3d;
-  cny3d = tny3d*cos(camerapitch) - tnz3d*sin(camerapitch);
-  cnz3d = tny3d*sin(camerapitch) + tnz3d*cos(camerapitch);
 
-  
-
-  cy2 = ay2*cos(camerapitch) - az2*sin(camerapitch);
-  cz2 = ay2*sin(camerapitch) + az2*cos(camerapitch);
-  cx2 = ax2;
-
-  cy3 = ay3*cos(camerapitch) - az3*sin(camerapitch);
-  cz3 = ay3*sin(camerapitch) + az3*cos(camerapitch);
-  cx3 = ax3;
-  
 
 
   //rotate y axis
-  ccx1 =  cx1*cos(camerayaw) + cz1*sin(camerayaw);
-  ccz1 = -cx1*sin(camerayaw) + cz1*cos(camerayaw);
-  ccy1 =  cy1;
-  ccnx3d =  cnx3d*cos(camerayaw) + cnz3d*sin(camerayaw);
-  ccnz3d = -cnx3d*sin(camerayaw) + cnz3d*cos(camerayaw);
-  ccny3d =  cny3d;
+  cx1 =  ax1*cos(camerayaw) + az1*sin(camerayaw);
+  cz1 = -ax1*sin(camerayaw) + az1*cos(camerayaw);
+  cy1 =  ay1;
+  cnx3d =  tnx3d*cos(camerayaw) + tnz3d*sin(camerayaw);
+  cnz3d = -tnx3d*sin(camerayaw) + tnz3d*cos(camerayaw);
+  cny3d =  tny3d;
 
 
-  ccx2 =  cx2*cos(camerayaw) + cz2*sin(camerayaw);
-  ccz2 = -cx2*sin(camerayaw) + cz2*cos(camerayaw);
-  ccy2 =  cy2;
+  cx2 =  ax2*cos(camerayaw) + az2*sin(camerayaw);
+  cz2 = -ax2*sin(camerayaw) + az2*cos(camerayaw);
+  cy2 =  ay2;
 
-  ccx3 =  cx3*cos(camerayaw) + cz3*sin(camerayaw);
-  ccz3 = -cx3*sin(camerayaw) + cz3*cos(camerayaw);
-  ccy3 =  cy3;
+  cx3 =  ax3*cos(camerayaw) + az3*sin(camerayaw);
+  cz3 = -ax3*sin(camerayaw) + az3*cos(camerayaw);
+  cy3 =  ay3;
 
-  //translate
-  ccx1 = ccx1+camerax;
-  ccy1 = ccy1+cameray; 
-  ccz1 = ccz1+cameraz;
-  ccx2 = ccx2+camerax;
-  ccy2 = ccy2+cameray; 
-  ccz2 = ccz2+cameraz;
-  ccx3 = ccx3+camerax;
-  ccy3 = ccy3+cameray; 
-  ccz3 = ccz3+cameraz;
+
+    //rotate x axis 
+  ccy1 = cy1*cos(camerapitch) - cz1*sin(camerapitch);
+  ccz1 = cy1*sin(camerapitch) + cz1*cos(camerapitch);
+  ccx1 = cx1;
+  ccnx3d = cnx3d;
+  ccny3d = cny3d*cos(camerapitch) - cnz3d*sin(camerapitch);
+  ccnz3d = cny3d*sin(camerapitch) + cnz3d*cos(camerapitch);
+
+  
+
+  ccy2 = cy2*cos(camerapitch) - cz2*sin(camerapitch);
+  ccz2 = cy2*sin(camerapitch) + cz2*cos(camerapitch);
+  ccx2 = cx2;
+
+  ccy3 = cy3*cos(camerapitch) - cz3*sin(camerapitch);
+  ccz3 = cy3*sin(camerapitch) + cz3*cos(camerapitch);
+  ccx3 = cx3;
+
+  //zoom 
+
+    ccx1 += fx * camerazoom;
+    ccy1 += fy * camerazoom;
+    ccz1 += fz * camerazoom;
+
+    ccx2 += fx * camerazoom;
+    ccy2 += fy * camerazoom;
+    ccz2 += fz * camerazoom;
+
+    ccx3 += fx * camerazoom;
+    ccy3 += fy * camerazoom;
+    ccz3 += fz * camerazoom;
 
 
   if (ortho){
@@ -389,14 +397,17 @@ void rotate_translate_axis(int i,float tx1,float ty1,float tz1,float tx2,float t
   ccy3 = ccy3*cameraz; 
   }
   else{
-  ccx1 = (ccx1/(camerafov-ccz1))*cameraz;
-  ccy1 = (ccy1/(camerafov-ccz1))*cameraz; 
+  ccx1 = (ccx1/(1-ccz1))*camerafov;
+  ccy1 = (ccy1/(1-ccz1))*camerafov; 
 
-  ccx2 = (ccx2/(camerafov-ccz2))*cameraz;
-  ccy2 = (ccy2/(camerafov-ccz2))*cameraz; 
+  ccx2 = (ccx2/(1-ccz2))*camerafov;
+  ccy2 = (ccy2/(1-ccz2))*camerafov; 
 
-  ccx3 = (ccx3/(camerafov-ccz3))*cameraz;
-  ccy3 = (ccy3/(camerafov-ccz3))*cameraz; 
+  ccx3 = (ccx3/(1-ccz3))*camerafov;
+  ccy3 = (ccy3/(1-ccz3))*camerafov; 
+
+
+  
   }
 
 

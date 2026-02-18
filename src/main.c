@@ -17,9 +17,11 @@ int main()
     Events();                   // Handle events (like user inputs)
     fill_screen(124, 124, 124); // Clear screen to white
     objtocamera();  //set object array  based on camera
+    
     drawobj();//draw object array
-    //printf ("focal length %f, camera z %f\n",fov,cameraz);
+    printf ("camera z %f\n",cameraz);
     Render(); // Render everything on screen
+    
   }
 
   
