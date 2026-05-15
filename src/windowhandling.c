@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "camera.h"
+#include "obj.h"
 #include "graphics.h"
 
 #define PI 3.14159265358979323846 
@@ -210,10 +211,16 @@ void updatecamera(void){
     camerax = camerax + 0.01f;
 
     if (keyDown['D'])
-    camerax = camerax - 0.01f;
+    camera(0);
 
      if (keyDown['O'])
      ortho = !ortho;
+ 
+	 if (keyDown['P'])
+     camerafov += 0.1;
+ 
+	if (keyDown['I'])
+     camerafov -= 0.1;
        
 }
 

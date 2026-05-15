@@ -1,16 +1,17 @@
 #include <windows.h>
 #include "camera.h"
+#include "obj.h"
 #include "windowhandling.h"
 #include <stdbool.h>
 #include <stdio.h>
 
  bool keyDown[256];
 Camera cameradefault[2] = {
-    { 0, 0, 4, 0, 0, 1.3 },
-    {  0, 0, 4, 0, 0, 1.3 }
+    { 0, 0, 1, 0, 0, 1.3 },
+    {  0, 0, 1, 0, 0, 1.3 }
 };
 float camerax,cameray,cameraz,camerapitch,camerayaw,camerafov;
-float camerazoom,fx,fy,fz;
+float camerazoom = 1,fx,fy,fz;
 
 void camera(int cam){
     camerax = cameradefault[cam].x;
@@ -19,6 +20,7 @@ void camera(int cam){
     camerapitch = cameradefault[cam].pitch;
     camerayaw = cameradefault[cam].yaw;
     camerafov = cameradefault[cam].fov;
+	objtocamera();
 }
 
 

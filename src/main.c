@@ -3,6 +3,7 @@
 #include "windowhandling.h"
 #include "graphics.h"
 #include "camera.h"
+#include "obj.h"
 
 
 // Main function
@@ -15,11 +16,9 @@ int main()
   while (run)
   {                             // Main application loop
     Events();                   // Handle events (like user inputs)
-    fill_screen(124, 124, 124); // Clear screen to white
-    objtocamera();  //set object array  based on camera
-    
+    graphics_fill_screen(124, 124, 124); // Clear screen to white
+     objtocamera();//set object array  based on camera
     drawobj();//draw object array
-    printf ("camera z %f\n",cameraz);
     Render(); // Render everything on screen
     
   }
