@@ -10,8 +10,8 @@ Camera cameradefault[2] = {
     { 0, 0, 1, 0, 0, 1.3 },
     {  0, 0, 1, 0, 0, 1.3 }
 };
-float camerax,cameray,cameraz,camerapitch,camerayaw,camerafov;
-float camerazoom = 1,fx,fy,fz;
+float panx=0,pany=0,camerax,cameray,cameraz,camerapitch,camerayaw,camerafov;
+float camerazoom = 1,fx,fy,fz,px,py,pz;
 
 void camera(int cam){
     camerax = cameradefault[cam].x;
