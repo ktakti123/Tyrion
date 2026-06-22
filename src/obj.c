@@ -152,22 +152,6 @@ void rotate_translate_axis(int i,float camera_buffer_x1,float camera_buffer_y1,f
   ccy3 = cy3*cos(camerapitch) - cz3*sin(camerapitch);
   ccz3 = cy3*sin(camerapitch) + cz3*cos(camerapitch);
   ccx3 = cx3;
-  
-  
-
-  
-
-   /* ccx1 += fx * camerazoom;
-    ccy1 += fy * camerazoom;
-    ccz1 += fz * camerazoom;
-
-    ccx2 += fx * camerazoom;
-    ccy2 += fy * camerazoom;
-    ccz2 += fz * camerazoom;
-
-    ccx3 += fx * camerazoom;
-    ccy3 += fy * camerazoom;
-    ccz3 += fz * camerazoom;*/
 	
 	camera_buffer[i].x1 = ccx1;
     camera_buffer[i].y1 = ccy1;
@@ -182,18 +166,50 @@ void rotate_translate_axis(int i,float camera_buffer_x1,float camera_buffer_y1,f
 	camera_buffer[i].ny3d = ccny3d;
 	camera_buffer[i].nz3d = ccnz3d;
 	
+	
+	  
+	float rnx = -fz;
+	float rny = 0;
+	float rnz = fx;
+	ccx1 = ccx1+ rnx *panx ;
+    ccy1= ccy1+ rny *panx;
+    ccz1 = ccz1+ rnz *panx;
+	ccx2 = ccx2+ rnx *panx;
+    ccy2 = ccy2+ rny *panx;
+    ccz2 = ccz2+ rnz *panx;
+	ccx3 = ccx3+ rnx *panx;
+    ccy3 = ccy3+ rny *panx;
+    ccz3 = ccz3+ rnz *panx;
+	
+	
+	camera_buffer[i].x1 = ccx1;
+    camera_buffer[i].y1 = ccy1;
+    camera_buffer[i].z1 = ccz1;
+	camera_buffer[i].x2 = ccx2;
+    camera_buffer[i].y2 = ccy2;
+    camera_buffer[i].z2 = ccz2;
+	camera_buffer[i].x3 = ccx3;
+    camera_buffer[i].y3 = ccy3;
+    camera_buffer[i].z3 = ccz3;
+	camera_buffer[i].nx3d = ccnx3d;
+	camera_buffer[i].ny3d = ccny3d;
+	camera_buffer[i].nz3d = ccnz3d;
+	
+	
+	
+	
    
 
 
   if (ortho){
-  ccx1 = ccx1*cameraz*camerazoom;
-  ccy1 = ccy1*cameraz*camerazoom; 
+  ccx1 = ccx1*camerazoom;
+  ccy1 = ccy1*camerazoom; 
 
-  ccx2 = ccx2*cameraz*camerazoom;
-  ccy2 = ccy2*cameraz*camerazoom; 
+  ccx2 = ccx2*camerazoom;
+  ccy2 = ccy2*camerazoom; 
 
-  ccx3 = ccx3*cameraz*camerazoom;
-  ccy3 = ccy3*cameraz*camerazoom; 
+  ccx3 = ccx3*camerazoom;
+  ccy3 = ccy3*camerazoom; 
   }
   else{
   ccx1 = (ccx1/(1-ccz1))*camerafov*camerazoom;
