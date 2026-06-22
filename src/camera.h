@@ -8,4 +8,4 @@ typedef struct{
   }Camera;
 
   extern Camera cameradefault[2];
-  extern float camerax,cameray,cameraz,camerapitch,camerayaw,camerafov,camerazoom,fx,fy,fz;
+  extern float panx,pany,camerax,cameray,cameraz,camerapitch,camerayaw,camerafov,camerazoom,fx,fy,fz,px,py,pz;
